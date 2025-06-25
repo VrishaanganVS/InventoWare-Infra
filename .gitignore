@@ -1,0 +1,30 @@
+# Terraform state files (contain sensitive info)
+*.tfstate
+*.tfstate.backup
+
+# Crash logs
+crash.log
+
+# Terraform CLI .terraform directory
+.terraform/
+
+# Plan output files
+*.tfplan
+
+# Variable overrides (optional)
+terraform.tfvars
+*.tfvars.json
+
+# Sensitive files (keys, secrets)
+*.pem
+*.key
+*.crt
+*.env
+
+# VS Code or JetBrains project settings (optional)
+.vscode/
+.idea/
+
+# MacOS or Windows system files
+.DS_Store
+Thumbs.db

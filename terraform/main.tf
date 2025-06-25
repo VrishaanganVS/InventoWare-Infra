@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "eu-north-1"
 }
 
 # Security Group allowing SSH and app traffic
@@ -31,8 +31,8 @@ resource "aws_security_group" "invento_sg" {
 
 # EC2 Instance
 resource "aws_instance" "invento" {
-  ami           = "ami-0c02fb55956c7d316"
-  instance_type = "t3.nano"
+  ami           = "ami-0becc523130ac9d5d"
+  instance_type = "t3.medium"
   key_name      = var.key_name
 
   vpc_security_group_ids = [aws_security_group.invento_sg.id]
@@ -43,17 +43,20 @@ resource "aws_instance" "invento" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo yum update -y",
-      "sudo yum install -y docker git",
-      "sudo systemctl start docker",
-      "sudo usermod -aG docker ec2-user"
-    ]
+  "sudo apt-get update -y",
+  "sudo apt-get install docker.io -y",
+  "sudo systemctl start docker",
+  "sudo usermod -aG docker ubuntu"
+]
+
 
     connection {
       type        = "ssh"
-      user        = "ec2-user"
-      private_key = file("C:/Users/Anuj/.ssh/invento.pem")
+      user        = "ubuntu"  # ✅ change from ec2-user to ubuntu
+      private_key = file("~/.ssh/jenkins_invento.pem")
       host        = self.public_ip
     }
   }
 }
+
+
