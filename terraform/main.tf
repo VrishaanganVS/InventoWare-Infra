@@ -2,11 +2,15 @@ provider "aws" {
   region = "eu-north-1"
 }
 
-# Security Group allowing SSH and app traffic
 resource "aws_security_group" "invento_sg" {
   name        = "invento-sg"
   description = "Allow SSH and app access"
-  
+
+  lifecycle {
+    create_before_destroy = true
+    ignore_changes        = [name]  # Prevent recreation on name conflicts
+  }
+
   ingress {
     from_port   = 22
     to_port     = 22
