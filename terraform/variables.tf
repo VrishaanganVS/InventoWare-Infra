@@ -1,4 +1,5 @@
 variable "key_name" {
+  description = "Name of the existing AWS key pair to SSH"
   type        = string
-  description = "Your AWS EC2 key pair name for SSH access"
+  default     = "jenkins-invento" # <-- your actual key pair name
 }
