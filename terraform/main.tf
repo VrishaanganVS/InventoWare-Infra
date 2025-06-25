@@ -53,7 +53,7 @@ resource "aws_instance" "invento" {
     connection {
       type        = "ssh"
       user        = "ubuntu"  # ✅ change from ec2-user to ubuntu
-      private_key = file("~/.ssh/jenkins_invento.pem")
+      private_key = file("/var/lib/jenkins/.ssh/jenkins_invento.pem")
       host        = self.public_ip
     }
   }
